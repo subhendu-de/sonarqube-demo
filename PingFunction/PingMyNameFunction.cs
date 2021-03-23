@@ -12,8 +12,6 @@ namespace PingFunction
 {
     public static class PingMyNameFunction
     {
-        static string str;
-
         [FunctionName("PingMyNameFunction")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
@@ -21,8 +19,10 @@ namespace PingFunction
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
-            int i =0; 
-            int j=0;          
+            Guid g = new Guid();     // Noncompliant   
+
+            var s = "foo";
+            var t = "fee fie foe " + s.ToString();  // Noncompliant
 
             string name = req.Query["name"];
 
