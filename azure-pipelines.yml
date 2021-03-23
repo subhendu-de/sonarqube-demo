@@ -3,7 +3,6 @@ pool:
 
 steps:
 - script: |
-    dir
     dotnet restore
     dotnet build --configuration Release
   workingDirectory: "$(System.DefaultWorkingDirectory)/PingFunction"
@@ -15,12 +14,6 @@ steps:
     publishWebProjects: false
     modifyOutputPath: true
     zipAfterPublish: false
-- task: ArchiveFiles@2
-  displayName: "Archive files"
-  inputs:
-    rootFolderOrFile: "$(System.DefaultWorkingDirectory)/publish_output/s"
-    includeRootFolder: false
-    archiveFile: "$(System.DefaultWorkingDirectory)/build$(Build.BuildId).zip"
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(System.DefaultWorkingDirectory)/build$(Build.BuildId).zip'
