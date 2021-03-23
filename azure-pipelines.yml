@@ -5,12 +5,12 @@ steps:
 - script: |
     dotnet restore
     dotnet build --configuration Release
-  workingDirectory: "**/PingFunction/*.csproj"
+  workingDirectory: "/PingFunction/*.csproj"
 - task: DotNetCoreCLI@2
   inputs:
     command: publish
     arguments: '--configuration Release --output publish_output'
-    projects: '*.csproj'
+    projects: '/PingFunction/*.csproj'
     publishWebProjects: false
     modifyOutputPath: true
     zipAfterPublish: false
