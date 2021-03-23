@@ -5,12 +5,12 @@ steps:
 - script: |
     dotnet restore
     dotnet build --configuration Release
-  workingDirectory: "$(System.DefaultWorkingDirectory)/PingFunction/*.csproj"
+  workingDirectory: "$(System.DefaultWorkingDirectory)/sonarqube-demo/PingFunction/*.csproj"
 - task: DotNetCoreCLI@2
   inputs:
     command: publish
     arguments: '--configuration Release --output publish_output'
-    projects: '$(System.DefaultWorkingDirectory)/PingFunction/*.csproj'
+    projects: '$(System.DefaultWorkingDirectory)/sonarqube-demo/PingFunction/*.csproj'
     publishWebProjects: false
     modifyOutputPath: true
     zipAfterPublish: false
