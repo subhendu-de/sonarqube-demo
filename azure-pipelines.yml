@@ -10,7 +10,7 @@ steps:
   inputs:
     command: publish
     arguments: '--configuration Release'
-    projects: '*.csproj'
+    projects: '$(System.DefaultWorkingDirectory)/PingFunction/*.csproj'
     publishWebProjects: false
     modifyOutputPath: true
     zipAfterPublish: false
