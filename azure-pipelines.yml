@@ -11,9 +11,10 @@ steps:
     SonarQube: 'svc-sonarqube'
     scannerMode: 'CLI'
     configMode: 'manual'
-    cliProjectKey: 'Sample'
-    cliProjectName: 'Sample'
+    cliProjectKey: 'subhendu-de_sonarqube-demo'
+    cliProjectName: 'subhendu-de_sonarqube-demo'
     cliSources: '.'
+    extraProperties: 'sonar.organization=subhendu-de'
 - task: DotNetCoreCLI@2
   inputs:
     command: publish
