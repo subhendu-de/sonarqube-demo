@@ -12,12 +12,16 @@ namespace PingFunction
 {
     public static class PingMyNameFunction
     {
+        static string str;
+
         [FunctionName("PingMyNameFunction")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
+
+            int i =0;           
 
             string name = req.Query["name"];
 
