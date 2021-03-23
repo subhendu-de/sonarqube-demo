@@ -21,7 +21,8 @@ namespace PingFunction
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
-            int i =0;           
+            int i =0; 
+            int j=0;          
 
             string name = req.Query["name"];
 
