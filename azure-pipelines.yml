@@ -9,7 +9,7 @@ pool:
 steps: 
 - task: DotNetCoreInstaller@1
   inputs:
-    version: '5.0.4'
+    version: '5.0.201'
 
 - task: CmdLine@2
   inputs:
