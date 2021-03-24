@@ -8,7 +8,7 @@ steps:
   workingDirectory: "$(System.DefaultWorkingDirectory)/PingFunction"
 - task: SonarQubePrepare@4
   inputs:
-    SonarQube: 'svc-sonarqube'
+    SonarQube: 'svc-sonarcloud'
     scannerMode: 'CLI'
     configMode: 'manual'
     cliProjectKey: 'subhendu-de_sonarqube-demo'
