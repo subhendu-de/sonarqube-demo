@@ -1,3 +1,8 @@
+trigger:
+  branches:
+    include:
+      - '*'
+
 pool:
   vmImage: 'VS2017-Win2016'
 
@@ -5,7 +10,7 @@ steps:
 - script: |
     dotnet restore
     dotnet build --configuration Release
-  workingDirectory: "$(System.DefaultWorkingDirectory)/PingFunction"
+  workingDirectory: "$(System.DefaultWorkingDirectory)/SampleWebApp"
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'svc-sonarcloud'
@@ -15,15 +20,18 @@ steps:
     cliProjectKey: 'subhendu-de_sonarqube-demo'
     cliProjectName: 'subhendu-de_sonarqube-demo'
     cliSources: '.'
+
 - task: DotNetCoreCLI@2
   inputs:
     command: publish
     arguments: '--configuration Release'
-    projects: '$(System.DefaultWorkingDirectory)/PingFunction/*.csproj'
+    projects: '$(System.DefaultWorkingDirectory)/SampleWebApp/*.csproj'
     publishWebProjects: false
     modifyOutputPath: true
     zipAfterPublish: false
+
 - task: SonarCloudAnalyze@1
+
 - task: SonarCloudPublish@1
   inputs:
     pollingTimeoutSec: '300'
