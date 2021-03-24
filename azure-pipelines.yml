@@ -6,15 +6,15 @@ steps:
     dotnet restore
     dotnet build --configuration Release
   workingDirectory: "$(System.DefaultWorkingDirectory)/PingFunction"
-- task: SonarQubePrepare@4
+- task: SonarCloudPrepare@1
   inputs:
-    SonarQube: 'svc-sonarcloud'
+    SonarCloud: 'svc-sonarcloud'
+    organization: 'subhendu-de'
     scannerMode: 'CLI'
     configMode: 'manual'
     cliProjectKey: 'subhendu-de_sonarqube-demo'
     cliProjectName: 'subhendu-de_sonarqube-demo'
     cliSources: '.'
-    extraProperties: 'sonar.organization=subhendu-de'
 - task: DotNetCoreCLI@2
   inputs:
     command: publish
@@ -23,7 +23,7 @@ steps:
     publishWebProjects: false
     modifyOutputPath: true
     zipAfterPublish: false
-- task: SonarQubeAnalyze@4
-- task: SonarQubePublish@4
+- task: SonarCloudAnalyze@1
+- task: SonarCloudPublish@1
   inputs:
     pollingTimeoutSec: '300'
