@@ -20,9 +20,11 @@ namespace PingFunction
             log.LogInformation("C# HTTP trigger function processed a request.");
 
             Guid g = new Guid();     // Noncompliant   
+            Guid g1 = new Guid();     // Noncompliant   
 
             var s = "foo";
             var t = "fee fie foe " + s.ToString();  // Noncompliant
+            var t1 = "fee fie foe " + s.ToString();  // Noncompliant
 
             string name = req.Query["name"];
 
