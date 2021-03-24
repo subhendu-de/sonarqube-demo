@@ -11,11 +11,9 @@ steps:
   inputs:
     SonarCloud: 'svc-sonarcloud'
     organization: 'subhendu-de'
-    scannerMode: 'CLI'
-    configMode: 'manual'
-    cliProjectKey: 'sonar-project.properties'
-    cliProjectName: 'sonar-project.properties'
-    cliSources: '.'
+    scannerMode: 'MSBuild'
+    projectKey: 'subhendu-de_sonarqube-demo'
+    projectName: 'subhendu-de_sonarqube-demo'
 
 - script: |
     dotnet restore
