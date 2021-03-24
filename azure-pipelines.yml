@@ -7,42 +7,24 @@ pool:
   vmImage: 'windows-latest'
 
 steps: 
-- task: DotNetCoreInstaller@1
+- task: SonarCloudPrepare@1
   inputs:
-    version: '5.0.201'
+    SonarCloud: 'svc-sonarcloud'
+    organization: 'subhendu-de'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: 'subhendu-de_sonarqube-demo'
+    cliProjectName: 'subhendu-de_sonarqube-demo'
+    cliSources: '.'
 
-- task: CmdLine@2
+- task: DotNetCoreCLI@2
   inputs:
-    script: |
-      dotnet tool install --global dotnet-sonarscanner --version 5.1.0
-      dotnet sonarscanner begin /k:"subhendu-de_sonarqube-demo" /o:"subhendu-de" /d:sonar.login='$(SonarToken)'
-      dotnet build --configuration Release
-      dotnet sonarscanner end /d:sonar.login='$(SonarToken)'
-    workingDirectory: "$(System.DefaultWorkingDirectory)/SampleWebApp"
+    command: 'build'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/SampleWebApp'
 
-# - task: SonarCloudPrepare@1
-#   inputs:
-#     SonarCloud: 'svc-sonarcloud'
-#     organization: 'subhendu-de'
-#     scannerMode: 'CLI'
-#     configMode: 'manual'
-#     cliProjectKey: 'subhendu-de_sonarqube-demo'
-#     cliProjectName: 'subhendu-de_sonarqube-demo'
-#     cliSources: '.'
+- task: SonarCloudAnalyze@1
 
-# - task: DotNetCoreCLI@2
-#   inputs:
-#     command: 'build'
-#     workingDirectory: '$(System.DefaultWorkingDirectory)/SampleWebApp'
-
-# - task: SonarCloudAnalyze@1
-
-# - task: SonarCloudPublish@1
-#   inputs:
-#     pollingTimeoutSec: '300'
-
-- task: PowerShell@2
+- task: SonarCloudPublish@1
   inputs:
-    filePath: '$(System.DefaultWorkingDirectory)/get-sonarqube-quality-gate-status.ps1'
-    arguments: '-SonarToken $(SonarToken) -SonarServerName sonarcloud.io -SonarProjectKey subhendu-de_sonarqube-demo -Branch dev'
+    pollingTimeoutSec: '300'
 
