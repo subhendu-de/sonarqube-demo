@@ -11,16 +11,16 @@ steps:
   inputs:
     SonarCloud: 'svc-sonarcloud'
     organization: 'subhendu-de'
-    scannerMode: 'MSBuild'
-    projectKey: 'subhendu-de_sonarqube-demo'
-    projectName: 'subhendu-de_sonarqube-demo'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: 'subhendu-de_sonarqube-demo'
+    cliProjectName: 'subhendu-de_sonarqube-demo'
+    cliSources: '.'
 
-- task: VSBuild@1
-  displayName: 'Build solution **\*.sln'
+- task: DotNetCoreCLI@2
   inputs:
-    solution: '$(System.DefaultWorkingDirectory)/SampleWebApp/*.csproj'
-    platform: 'any cpu'
-    configuration: 'Release'
+    command: 'build'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/SampleWebApp'
 
 - task: SonarCloudAnalyze@1
 
