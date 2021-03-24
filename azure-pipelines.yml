@@ -4,14 +4,9 @@ trigger:
       - '*'
 
 pool:
-  vmImage: 'VS2017-Win2016'
+  vmImage: 'windows-latest'
 
-steps:
-- script: |
-    dotnet restore
-    dotnet build --configuration Release
-  workingDirectory: "$(System.DefaultWorkingDirectory)/SampleWebApp"
-  
+steps: 
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'svc-sonarcloud'
@@ -24,12 +19,8 @@ steps:
 
 - task: DotNetCoreCLI@2
   inputs:
-    command: publish
-    arguments: '--configuration Release'
-    projects: '$(System.DefaultWorkingDirectory)/SampleWebApp/*.csproj'
-    publishWebProjects: false
-    modifyOutputPath: true
-    zipAfterPublish: false
+    command: 'build'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/SampleWebApp'
 
 - task: SonarCloudAnalyze@1
 
@@ -37,7 +28,3 @@ steps:
   inputs:
     pollingTimeoutSec: '300'
 
-- task: PowerShell@2
-  inputs:
-    filePath: '$(System.DefaultWorkingDirectory)/get-sonarqube-quality-gate-status.ps1'
-    arguments: '-SonarToken $(SonarToken) -SonarServerName sonarcloud.io -SonarProjectKey subhendu-de_sonarqube-demo -Branch dev'
