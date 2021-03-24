@@ -6,12 +6,12 @@ trigger:
 pool:
   vmImage: 'VS2017-Win2016'
 
-- script: |
-  dotnet restore
-  dotnet build --configuration Release
-workingDirectory: "$(System.DefaultWorkingDirectory)/SampleWebApp"
-
 steps: 
+- script: |
+    dotnet restore
+    dotnet build --configuration Release
+    workingDirectory: "$(System.DefaultWorkingDirectory)/SampleWebApp"
+
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'svc-sonarcloud'
