@@ -10,7 +10,7 @@ steps:
 - script: |
     dotnet restore
     dotnet build --configuration Release
-    workingDirectory: "$(System.DefaultWorkingDirectory)/SampleWebApp"
+  workingDirectory: "$(System.DefaultWorkingDirectory)/SampleWebApp"
 
 - task: SonarCloudPrepare@1
   inputs:
