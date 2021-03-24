@@ -13,8 +13,8 @@ steps:
     organization: 'subhendu-de'
     scannerMode: 'CLI'
     configMode: 'manual'
-    cliProjectKey: 'subhendu-de_sonarqube-demo'
-    cliProjectName: 'subhendu-de_sonarqube-demo'
+    cliProjectKey: 'sonar-project.properties'
+    cliProjectName: 'sonar-project.properties'
     cliSources: '.'
 
 - script: |
