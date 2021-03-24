@@ -33,12 +33,3 @@ steps:
     filePath: '$(System.DefaultWorkingDirectory)/get-sonarqube-quality-gate-status.ps1'
     arguments: '-SonarToken $(SonarToken) -SonarServerName sonarcloud.io -SonarProjectKey subhendu-de_sonarqube-demo -Branch dev'
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: publish
-    arguments: '--configuration Release'
-    projects: '$(System.DefaultWorkingDirectory)/SampleWebApp/*.csproj'
-    publishWebProjects: false
-    modifyOutputPath: true
-    zipAfterPublish: false
-
