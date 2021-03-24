@@ -1,3 +1,8 @@
+trigger:
+  branches:
+    include:
+      - '*'
+
 pool:
   vmImage: 'VS2017-Win2016'
 
@@ -5,28 +10,33 @@ steps:
 - script: |
     dotnet restore
     dotnet build --configuration Release
-  workingDirectory: "$(System.DefaultWorkingDirectory)/PingFunction"
-- task: SonarQubePrepare@4
+  workingDirectory: "$(System.DefaultWorkingDirectory)/SampleWebApp"
+  
+- task: SonarCloudPrepare@1
   inputs:
-    SonarQube: 'svc-sonarqube'
+    SonarCloud: 'svc-sonarcloud'
+    organization: 'subhendu-de'
     scannerMode: 'CLI'
     configMode: 'manual'
     cliProjectKey: 'subhendu-de_sonarqube-demo'
     cliProjectName: 'subhendu-de_sonarqube-demo'
     cliSources: '.'
-    extraProperties: 'sonar.organization=subhendu-de'
+
 - task: DotNetCoreCLI@2
   inputs:
     command: publish
     arguments: '--configuration Release'
-    projects: '$(System.DefaultWorkingDirectory)/PingFunction/*.csproj'
+    projects: '$(System.DefaultWorkingDirectory)/SampleWebApp/*.csproj'
     publishWebProjects: false
     modifyOutputPath: true
     zipAfterPublish: false
-- task: SonarQubeAnalyze@4
-- task: SonarQubePublish@4
+
+- task: SonarCloudAnalyze@1
+
+- task: SonarCloudPublish@1
   inputs:
     pollingTimeoutSec: '300'
+
 - task: PowerShell@2
   inputs:
     filePath: '$(System.DefaultWorkingDirectory)/get-sonarqube-quality-gate-status.ps1'
