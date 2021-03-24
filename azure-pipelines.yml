@@ -4,9 +4,17 @@ trigger:
       - '*'
 
 pool:
-  vmImage: 'VS2017-Win2016'
+  vmImage: 'windows-latest'
 
 steps: 
+- task: DotNetCoreInstaller@1
+  inputs:
+    version: '5.0'
+
+- task: CmdLine@2
+  inputs:
+    script: 'dotnet tool install --global dotnet-sonarscanner --version 5.1.0'
+
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'svc-sonarcloud'
