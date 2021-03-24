@@ -1,7 +1,6 @@
-trigger:
-  branches:
-    include:
-      - '*'
+trigger: none
+pr:
+  - main
 
 pool:
   vmImage: 'windows-latest'
@@ -27,4 +26,9 @@ steps:
 - task: SonarCloudPublish@1
   inputs:
     pollingTimeoutSec: '300'
+
+- task: PowerShell@2
+  inputs:
+    filePath: '$(System.DefaultWorkingDirectory)/get-sonarqube-quality-gate-status.ps1'
+    arguments: '-SonarToken $(SonarToken) -SonarServerName sonarcloud.io -SonarProjectKey subhendu-de_sonarqube-demo -Branch dev'
 
