@@ -12,7 +12,6 @@ namespace SampleWebApp.Controllers
     public class HomeController : Controller
     {
         private ILogger<HomeController> _logger;
-        private string _topic;
 
         public HomeController(ILogger<HomeController> logger)
         {
