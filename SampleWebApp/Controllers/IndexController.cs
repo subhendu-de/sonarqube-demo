@@ -12,6 +12,7 @@ namespace SampleWebApp.Controllers
     public class IndexController : Controller
     {
         private ILogger<IndexController> _logger;
+        private string _data;
 
         public IndexController(ILogger<IndexController> logger)
         {
