@@ -13,6 +13,8 @@ namespace SampleWebApp.Controllers
     {
         private ILogger<HomeController> _logger;
 
+        private string _data;
+
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -20,6 +22,9 @@ namespace SampleWebApp.Controllers
 
         public IActionResult Index()
         {
+            try{}
+            catch(NullReferenceException){}
+            
             return View();
         }
 

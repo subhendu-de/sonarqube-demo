@@ -1,8 +1,8 @@
-# the pipeline triggers when ay pr is merged to the main branch
+# pipeline triggers when pr is merged to the main branch
 trigger:
   - main
 
-# the pipeline triggers when pr is raised from feature branch to the main branch
+# npipeline triggers when pr is raised from feature branch to the main branch
 pr:
   - main
 
