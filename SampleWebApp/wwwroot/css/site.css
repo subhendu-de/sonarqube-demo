@@ -29,6 +29,15 @@ a {
 html {
   font-size: 14px;
 }
+
+html {
+  line-height: inherit;
+}
+
+html {
+  position: absolute;
+}
+
 @media (min-width: 768px) {
   html {
     font-size: 16px;
